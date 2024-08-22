@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://2pg6r3l2onp"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_n8cj2"]
+[ext_resource type="Script" path="res://scripts/player/camera_pivot.gd" id="2_00jwd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wld5x"]
+radius = 0.3
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4yo3r"]
+radius = 0.3
+height = 1.0
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.999819, 0, -0.0190446, 0, 1, 0, 0.0190446, 0, 0.999819, -0.0637351, 0.0103797, -0.0677797)
+script = ExtResource("1_n8cj2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.474163, 0)
+mesh = SubResource("CapsuleMesh_wld5x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.449665, 0)
+shape = SubResource("CapsuleShape3D_4yo3r")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.713434, 0)
+script = ExtResource("2_00jwd")
+vertical_min_angle = -30.0
+vertical_max_angle = 30.0
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00810564, 0.128138)
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraPivot/Camera"]
+transform = Transform3D(1.00172, 1.52324e-08, -8.87495e-17, 0, -3.58076e-07, -1.09191, -1.86265e-09, 8.19183, -4.77288e-08, -0.00652937, -0.00810564, -0.470923)
+collision_mask = 2
+collide_with_areas = true

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://2pg6r3l2onp"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_n8cj2"]
+[ext_resource type="Script" path="res://scripts/player/camera_pivot.gd" id="2_00jwd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tic2l"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uawg7"]
+points = PackedVector3Array(0.190622, 0.340095, 0.0427398, -0.193135, -0.338923, -0.0310244, -0.177289, -0.351479, -0.0747747, -0.16398, 0.383904, -0.0753819, -0.0600953, 0.32193, 0.188647, 0.11673, -0.369802, 0.146319, 0.0859448, -0.335648, -0.176689, 0.0278977, 0.339474, -0.193446, -0.147558, -0.335783, 0.129782, 0.188647, -0.32193, -0.0600953, 0.0288523, -0.487654, -0.0625052, -0.0891595, -0.321166, -0.176769, -0.191178, 0.30631, 0.0567225, 0.028905, 0.488499, 0.0594362, 0.144493, 0.336035, -0.133056, 0.099397, 0.317427, 0.171555, -0.0457956, -0.339183, 0.190107, -0.116906, 0.317159, -0.160164, -0.0618573, -0.467355, 0.0888369, 0.186824, -0.289876, 0.0708561, 0.0586138, 0.46682, -0.0919081, -0.122093, 0.451968, 0.0435783, 0.119466, -0.454024, 0.0437837, 0.057189, -0.323406, 0.18952, -0.0470766, 0.47042, -0.0926045, -0.190797, 0.291104, -0.0597801, -0.0766135, -0.450316, -0.106639, -0.147558, 0.335785, 0.129783, 0.190107, 0.339183, -0.0457956, -0.0310246, -0.338926, -0.193136, 0.159071, 0.335966, 0.115245, 0.0427392, 0.34009, 0.19062)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.999819, 0, -0.0190446, 0, 1, 0, 0.0190446, 0, 0.999819, -0.0637351, 0.0103797, -0.0677797)
+script = ExtResource("1_n8cj2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.449665, 0)
+mesh = SubResource("CapsuleMesh_tic2l")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.449665, 0)
+shape = SubResource("ConvexPolygonShape3D_uawg7")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.713434, 0)
+script = ExtResource("2_00jwd")
+vertical_min_angle = -30.0
+vertical_max_angle = 30.0
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00810564, 0.128138)
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraPivot/Camera"]
+transform = Transform3D(0.999646, 0.0190393, -0.0185912, -0.0190393, 0.0236296, -0.999539, -0.0185912, 0.99954, 0.0239837, 0, -0.00810564, -0.128138)
+collide_with_areas = true
+collide_with_bodies = false

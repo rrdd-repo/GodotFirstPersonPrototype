@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://boa1jiorutobh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hk2"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 2
+albedo_color = Color(0, 1, 0, 0.172549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_l54ks"]
+material = SubResource("StandardMaterial3D_r1hk2")
+radius = 0.25
+height = 0.45
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v75y4"]
+radius = 0.25
+
+[node name="TeleportPoint" type="Area3D" groups=["teleport_points"]]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_l54ks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v75y4")
